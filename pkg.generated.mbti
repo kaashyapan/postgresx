@@ -1,0 +1,97 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "kasyapan/postgresx"
+
+import {
+  "moonbit-community/postgres/client",
+  "moonbit-community/postgres/protocol",
+  "moonbitlang/core/buffer",
+  "moonbitlang/core/debug",
+  "moonbitlang/x/decimal",
+  "moonbitlang/x/time",
+  "moonbitlang/x/uuid",
+}
+
+// Values
+pub fn get_as_serial(Bytes?) -> Int raise
+
+// Errors
+pub(all) suberror PostgresxError {
+  UnexpectedNullorInvalid(String)
+} derive(@debug.Debug)
+
+// Types and methods
+type DecimalSign derive(Eq, Show, @debug.Debug)
+
+pub struct Interval {
+  period : @time.Period
+  duration : @time.Duration
+} derive(Compare, Eq, Show)
+pub fn Interval::of(@time.Period, @time.Duration) -> Self
+pub impl @debug.Debug for Interval
+
+type PgDate derive(Show, @debug.Debug)
+pub fn PgDate::of_plain_date(@time.PlainDate) -> Self
+pub fn PgDate::to_plain_date(Self) -> @time.PlainDate raise
+pub fn PgDate::to_string(Self) -> Unit
+pub impl @client.FromSql for PgDate
+pub impl @client.ToSql for PgDate
+
+type PgDecimal derive(Show, @debug.Debug)
+pub fn PgDecimal::of_decimal(@decimal.Decimal) -> Self raise
+pub fn PgDecimal::to_decimal(Self) -> @decimal.Decimal raise
+pub fn PgDecimal::to_string(Self) -> String
+pub impl @client.FromSql for PgDecimal
+pub impl @client.ToSql for PgDecimal
+
+type PgInterval derive(@debug.Debug)
+pub fn PgInterval::of_period_duration(Interval) -> Self
+pub fn PgInterval::to_period_duration(Self) -> Interval raise
+pub impl @client.FromSql for PgInterval
+pub impl @client.ToSql for PgInterval
+
+type PgTime derive(Show, @debug.Debug)
+pub fn PgTime::of_plain_time(@time.PlainTime) -> Self
+pub fn PgTime::to_plain_time(Self) -> @time.PlainTime raise
+pub fn PgTime::to_string(Self) -> Unit
+pub impl @client.FromSql for PgTime
+pub impl @client.ToSql for PgTime
+
+type PgTimeTz derive(Show, @debug.Debug)
+pub fn PgTimeTz::of_timetz(TimeTz) -> Self
+pub fn PgTimeTz::to_timetz(Self) -> TimeTz raise
+pub impl @client.FromSql for PgTimeTz
+pub impl @client.ToSql for PgTimeTz
+
+type PgTimestamp derive(Show, @debug.Debug)
+pub fn PgTimestamp::of_plain_date_time(@time.PlainDateTime) -> Self
+pub fn PgTimestamp::to_plain_date_time(Self) -> @time.PlainDateTime raise
+pub fn PgTimestamp::to_string(Self) -> Unit
+pub impl @client.FromSql for PgTimestamp
+pub impl @client.ToSql for PgTimestamp
+
+type PgTimestampz derive(Show, @debug.Debug)
+pub fn PgTimestampz::of_zoned_date_time(@time.ZonedDateTime) -> Self
+pub fn PgTimestampz::to_string(Self) -> Unit
+pub fn PgTimestampz::to_zoned_date_time(Self) -> @time.ZonedDateTime raise
+pub impl @client.FromSql for PgTimestampz
+pub impl @client.ToSql for PgTimestampz
+
+type PgUUID derive(Show)
+pub fn PgUUID::of_uuid(@uuid.UUID) -> Self
+pub fn PgUUID::to_string(Self) -> Unit
+pub fn PgUUID::to_uuid(Self) -> @uuid.UUID
+pub impl @client.FromSql for PgUUID
+pub impl @client.ToSql for PgUUID
+pub impl @debug.Debug for PgUUID
+
+pub struct TimeTz {
+  time : @time.PlainTime
+  zone_offset : @time.ZoneOffset
+} derive(Compare, Eq, Show)
+pub fn TimeTz::of(@time.PlainTime, @time.ZoneOffset) -> Self
+pub impl @debug.Debug for TimeTz
+
+// Type aliases
+
+// Traits
+

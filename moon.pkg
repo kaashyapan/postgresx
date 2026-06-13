@@ -1,0 +1,11 @@
+import {
+  "moonbitlang/x/uuid",
+  "moonbitlang/x/decimal",
+  "moonbitlang/x/time",
+  "moonbit-community/postgres/client" @pgclient,
+  "moonbit-community/postgres/protocol" @proto,
+  "moonbitlang/core/debug",
+  "moonbitlang/core/string"
+}
+
+warnings = "-20-27"
